@@ -1,30 +1,36 @@
 pipeline {
-         agent any
-         }
+    agent any
 
-   environment {
-    // Define environment variables as needed
-    DOCKER_IMAGE_NAME = 'poojiofc/docker-image'
-    DOCKER_IMAGE_TAG = 'latest'
-    }
-
-   stages {
-    stage('Checkout') {
-        steps {
-            // Check out your source code from your version control system (e.g., Git)
-            checkout scm
+    stages {
+        stage('Checkout') {
+            steps {
+                // Cloning the repository
+                checkout scm
+            }
         }
-    }
 
-    stage('Build and Push Docker Image') {
-    steps {
-        script {
-            docker.build('poojiofc/docker-image')
-            docker.withRegistry('https://your-docker-registry-url', '801ca630-3725-4ea2-a3d2-521ba328be1e') {
-                docker.image('poojiofc/docker-image').push()
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile in the repository
+                    sh 'docker build -t prathikm/docker .'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        // Login to Docker Hub
+                         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+
+                        // Push the Docker image to Docker Hub
+                        sh 'docker push prathikm/docker'
+                    }
+                }
             }
         }
     }
- }
 
 }
