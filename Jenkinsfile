@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile in the repository
-                    sh 'docker build -t prathikm/docker .'
+                    sh 'docker build -t poojiofc/docker .'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                          sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
 
                         // Push the Docker image to Docker Hub
-                        sh 'docker push prathikm/docker'
+                        sh 'docker push poojiofc/docker'
                     }
                 }
             }
