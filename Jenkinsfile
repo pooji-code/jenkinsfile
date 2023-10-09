@@ -18,7 +18,7 @@ stages {
     steps {
         script {
             docker.build('poojiofc/docker-image')
-            docker.withRegistry('https://your-docker-registry-url', 'your-docker-credentials-id') {
+            docker.withRegistry('https://your-docker-registry-url', '801ca630-3725-4ea2-a3d2-521ba328be1e') {
                 docker.image('poojiofc/docker-image').push()
             }
         }
