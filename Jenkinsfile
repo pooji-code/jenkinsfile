@@ -14,12 +14,12 @@ stages {
         }
     }
 
-    stage('Build Docker Image') {
-        steps {
-            // Build the Docker image using the Dockerfile
-            script {
-                def dockerImage = docker.build("${env.DOCKER_poojiofc/docker-image})
-                dockerImage.push()
+    stage('Build and Push Docker Image') {
+    steps {
+        script {
+            docker.build('poojiofc/docker-image')
+            docker.withRegistry('https://your-docker-registry-url', 'your-docker-credentials-id') {
+                docker.image('poojiofc/docker-image').push()
             }
         }
     }
