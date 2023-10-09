@@ -1,14 +1,8 @@
-image : pipeline {
-    agent any
-
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build a Docker image using a specified Dockerfile
-                    sh 'docker build -t my-docker-image:latest .'
-                }
-            }
-        }
-    }
-}
+FROM ubuntu
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.5 \
+    python3-pip \
+    && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
+CMD ["echo","image created"]
