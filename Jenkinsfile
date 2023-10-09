@@ -27,15 +27,4 @@ stages {
     }
 }
 
-post {
-    success {
-        // Actions to take on successful image build and push (e.g., notifications)
-        echo 'Docker image build and push were successful!'
-    }
-    failure {
-        // Actions to take on image build or push failure (e.g., notifications, rollback)
-        echo 'Docker image build or push failed!'
-    }
 }
-}
-         
