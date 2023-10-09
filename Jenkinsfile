@@ -2,13 +2,13 @@ pipeline {
          agent any
          }
 
-environment {
+   environment {
     // Define environment variables as needed
     DOCKER_IMAGE_NAME = 'poojiofc/docker-image'
     DOCKER_IMAGE_TAG = 'latest'
-}
+    }
 
-stages {
+   stages {
     stage('Checkout') {
         steps {
             // Check out your source code from your version control system (e.g., Git)
@@ -25,6 +25,6 @@ stages {
             }
         }
     }
-}
+ }
 
 }
